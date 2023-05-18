@@ -1,12 +1,17 @@
 import TodoItem from "./TodoItem";
+import {data} from "./data";
+import TodoCollection from "./TodoCollection";
 
-const data = [
-    { id: 1, task: '장보기', complete: true },
-    { id: 2, task: 'TS 학습하기', complete: false }
-]
+const sampleTodos : TodoItem[] = data.map((item) => {
+    return new TodoItem(item.id, item.task)
+})
 
-console.log('My Todo List')
-for(let i = 0; i < data.length; i++) {
-    const todoItem = new TodoItem(data[i].id, data[i].task, data[i].complete)
-    todoItem.printDetails()
-}
+const myTodoCollection = new TodoCollection('My Todo List', sampleTodos)
+
+myTodoCollection.addTodo('JavaScript 학습하기')
+myTodoCollection.addTodo('친구 만나기')
+
+myTodoCollection.markComplete(3, true)
+
+console.log(`${myTodoCollection.userName}`)
+myTodoCollection.todoItems.forEach((item) => console.log(item.printDetails()))
